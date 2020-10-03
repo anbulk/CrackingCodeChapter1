@@ -1,0 +1,13 @@
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\bin\Debug\netcoreapp3.1\CrackingCodeChapter1.exe
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\bin\Debug\netcoreapp3.1\CrackingCodeChapter1.deps.json
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\bin\Debug\netcoreapp3.1\CrackingCodeChapter1.runtimeconfig.json
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\bin\Debug\netcoreapp3.1\CrackingCodeChapter1.runtimeconfig.dev.json
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\bin\Debug\netcoreapp3.1\CrackingCodeChapter1.dll
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\bin\Debug\netcoreapp3.1\CrackingCodeChapter1.pdb
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\obj\Debug\netcoreapp3.1\CrackingCodeChapter1.csprojAssemblyReference.cache
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\obj\Debug\netcoreapp3.1\CrackingCodeChapter1.AssemblyInfoInputs.cache
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\obj\Debug\netcoreapp3.1\CrackingCodeChapter1.AssemblyInfo.cs
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\obj\Debug\netcoreapp3.1\CrackingCodeChapter1.csproj.CoreCompileInputs.cache
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\obj\Debug\netcoreapp3.1\CrackingCodeChapter1.dll
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\obj\Debug\netcoreapp3.1\CrackingCodeChapter1.pdb
+C:\1IM\Prep\CrackingCodeChapter1\CrackingCodeChapter1\obj\Debug\netcoreapp3.1\CrackingCodeChapter1.genruntimeconfig.cache
