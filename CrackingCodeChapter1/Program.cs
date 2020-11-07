@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -313,13 +314,13 @@ namespace CrackingCodeChapter1
             var mini = start;
             for (var j = start; j < arr.Length; j++)
             {
-                if(arr[mini] > arr[j])
+                if (arr[mini] > arr[j])
                 {
                     mini = j;
                 }
 
             }
-            if(start != mini)
+            if (start != mini)
             {
                 var a = arr[mini];
                 arr[mini] = arr[start];
@@ -370,14 +371,66 @@ namespace CrackingCodeChapter1
 
         }
 
+        public static int TestCompiler()
+        {
+
+            //normal array
+            int[][] arr = new int[4][];
+
+            // Initialize the elements 
+            arr[0] = new int[] { 1, 2, 3, 4 };
+            arr[1] = new int[] { 11, 34, 67 };
+            arr[2] = new int[] { 89, 23 };
+            arr[3] = new int[] { 0, 45, 78, 53, 99 };
+
+
+            for (var i = 0; i < arr.Length; i++)
+            {
+                Console.WriteLine(String.Format("\n-- row -- {0}", i));
+                for (var j = 0; j < arr[i].Length; j++)
+                {
+
+                    Console.Write(arr[i][j] + " ");
+                }
+            }
+
+            int[,] test = new int[4, 4] {
+
+                { 1,2,3,4},
+                {5,6,7,8},
+                {9,10,11,12 },
+                { 13,14,15,16}
+
+
+
+            };
+
+            for (var i = 0; i < test.GetLength(0); i++)
+            {
+                for (var j = 0; j < test.GetLength(1); j++)
+                {
+                    Console.WriteLine(test[i, j]);
+                }
+
+
+            }
+
+            Array.Sort(arr[0]);
+
+
+            return 0;
+
+        }
+
+
         static int Partition(int[] arr, int low, int high)
         {
             int i = low - 1;
             int pivot = arr[high];
 
-            for(var j=low; j<= high-1;j++)
+            for (var j = low; j <= high - 1; j++)
             {
-                if( pivot > arr[j])
+                if (pivot > arr[j])
                 {
                     i++;
                     var t = arr[i];
@@ -389,17 +442,17 @@ namespace CrackingCodeChapter1
 
             }
 
-            var t1 = arr[i+1];
-            arr[i+1] = arr[high];
+            var t1 = arr[i + 1];
+            arr[i + 1] = arr[high];
             arr[high] = t1;
 
-            return i+ 1;
+            return i + 1;
         }
 
-        public static void QuickSort(int[] arr,int low,int high)
+        public static void QuickSort(int[] arr, int low, int high)
         {
 
-            if(low < high)
+            if (low < high)
             {
                 var pi = Partition(arr, low, high);
 
@@ -409,11 +462,44 @@ namespace CrackingCodeChapter1
             }
 
         }
+        public static string GetStringPart(long columnNumber)
+        {
+            long remainder = columnNumber;
+            string columnName = String.Empty;
+            long modulo;
 
-        public static void Merge(int[] arr,int l, int m, int r)
+            while (remainder > 0)
+            {
+                modulo = (remainder - 1) % 26;
+                columnName = Convert.ToChar(65 + modulo).ToString() + columnName;
+                remainder = (int)((remainder - modulo) / 26);
+            }
+
+            return columnName;
+        }
+
+
+        public static string getSpreadsheetNotation(long n)
+        {
+
+            if (n > 0)
+            {
+                var row = Math.Ceiling((decimal)(n / 702)) + 1;
+                var column = n % 702;
+
+                var name = GetStringPart(Convert.ToInt64(column));
+
+                return Convert.ToString(row) + name;
+            }
+
+            return string.Empty;
+        }
+
+
+        public static void Merge(int[] arr, int l, int m, int r)
         {
             int n1 = m - l + 1;
-            int n2 = r- m;
+            int n2 = r - m;
 
             var larr = new int[n1];
             var rarr = new int[n2];
@@ -429,9 +515,9 @@ namespace CrackingCodeChapter1
 
             int j = 0;
             int k = l;
-             i = 0;
+            i = 0;
 
-            while (i <n1 && j <n2)
+            while (i < n1 && j < n2)
             {
 
                 if (larr[i] <= rarr[j])
@@ -442,7 +528,8 @@ namespace CrackingCodeChapter1
                 k++;
             }
 
-            while (i < n1){
+            while (i < n1)
+            {
                 arr[k] = larr[i];
                 k++;
                 i++;
@@ -456,11 +543,11 @@ namespace CrackingCodeChapter1
             }
         }
 
-        public static void MergeSort(int[] arr,int l,int r)
+        public static void MergeSort(int[] arr, int l, int r)
         {
             if (l < r)
             {
-                int m = ( l+ r )/ 2;
+                int m = (l + r) / 2;
 
                 MergeSort(arr, l, m);
                 MergeSort(arr, m + 1, r);
@@ -474,8 +561,99 @@ namespace CrackingCodeChapter1
 
         }
 
+        static int subString(string str, List<string> words)
+        {
+            var n = str.Length;
+            var res = 0;
+
+            // Pick starting point
+            for (int len = 1; len <= n;
+                                   len++)
+            {
+                var sub = new StringBuilder();
+                // Pick ending point
+                for (int i = 0;
+                        i <= n - len; i++)
+                {
+
+                    int j = i + len - 1;
+
+                    for (int k = i; k <= j;
+                                     k++)
+                        sub.Append(str[k]);
+
+                    if (words.Contains(sub.ToString()))
+                        res++;
+
+
+                }
+            }
+            return res;
+        }
+
+        public static int longestChain(List<string> words)
+        {
+            var result = 0;
+            foreach (var word in words)
+            {
+                if (word.Length == 1)
+                    result = 1;
+                else
+                {
+                    //calculate substrings of word
+                    var res = subString(word, words);
+                    if (res > result)
+                        result = res;
+
+                }
+
+
+            }
+            return result;
+
+        }
+
+        public static string Swap(string str, int i, int j)
+        {
+            var c = str.ToCharArray();
+
+            var t = c[i];
+            c[i] = c[j];
+            c[j] = t;
+            string s = new string(c);
+            return s;
+        }
+
+        public static void Perm(string str, int l, int r)
+        {
+            if (l == r)
+                Console.WriteLine(str);
+            else
+            {
+                for (var i = l; i <= r; i++)
+                {
+
+                    str = Swap(str, l, i);
+                    Perm(str,l + 1, r);
+                    //str = Swap(str, l, i);
+
+                }
+
+
+
+
+            }
+        }
+
         static void Main(string[] args)
         {
+
+            HashSet<char> h = new HashSet<char>();
+
+            h.Add('a');
+
+            h.Add('a');
+
             //Console.WriteLine("Is String Unique");
 
             //Console.WriteLine(IsUnique("aby3456") ? "Yes" : "No");
@@ -569,15 +747,84 @@ namespace CrackingCodeChapter1
             //MergeSort(arr, 0, arr.Length-1);
             //RecurrsiveSelectionSort(arr, 0);
             //PrintArray(arr);
-            var arr = new int[] { 10, 80, 30, 90, 40, 50, 70 };
-            QuickSort(arr,0,6);
+            //var arr = new int[] { 10, 80, 30, 90, 40, 50, 70 };
+            //QuickSort(arr,0,6);
 
-            for (var i = 0; i < 7; i++)
+            //for (var i = 0; i < 7; i++)
+            //{
+            //    Console.WriteLine(arr[i]);
+            //}
+
+            // getSpreadsheetNotation(702);
+
+            // Solution s = new Solution();
+            //  var val = s.LongestStrChain(new string[] { "ksqvsyq", "ks", "kss", "czvh", "zczpzvdhx", "zczpzvh", "zczpzvhx", "zcpzvh", "zczvh", "gr", "grukmj", "ksqvsq", 
+            //    "gruj", "kssq", "ksqsq", "grukkmj", "grukj", "zczpzfvdhx", "gru"});
+            // TestCompiler();
+            Perm("ABC",0,2);
+            Console.ReadLine();
+        }
+    }
+
+
+    public class Solution
+    {
+
+        public Dictionary<string, int> d = new Dictionary<string, int>();
+
+        public int LongestStrChain(string[] words)
+        {
+
+            Array.Sort(words, (x, y) => x.Length.CompareTo(y.Length));
+            var cl = 0;
+            var minLen = words[0].Length;
+            foreach (string s in words)
             {
-                Console.WriteLine(arr[i]);
+                if (s.Length == minLen)
+                    d.Add(s, 1);
+                else
+                    ChainLength(s);
+
+            }
+            //if(d.Count > 0)
+            //{
+            //    var key = d.Aggregate((x, y) => x.Key.Length > y.Key.Length ? x : y);
+            //    return key.Value > key.Key.Length? key.Value : key.Key.Length;
+            //}
+
+            if (d.Count > 0)
+            {
+                var key = d.Aggregate((x, y) => x.Key.Length > y.Key.Length ? x : y);
+                return d.Aggregate((x, y) => x.Key.Length < y.Key.Length ? x : y).Key.Length - 1 + key.Value;
             }
 
-            Console.ReadLine();
+            return 0;
+        }
+
+        public int ChainLength(string word)
+        {
+            var maxLen = 0;
+
+            for (var i = 0; i < word.Length; i++)
+            {
+                StringBuilder sb = new StringBuilder(word);
+                sb.Remove(i, 1);
+                var temp = sb.ToString();
+
+                if (d.ContainsKey(temp))
+                {
+                    var c1 = 0;
+                    d.TryGetValue(temp, out c1);
+                    c1++;
+                    if (!d.Keys.Contains(word))
+                        d.Add(word, c1);
+                    if (maxLen < c1)
+                        maxLen = c1;
+                }
+
+            }
+
+            return maxLen;
         }
     }
 }
